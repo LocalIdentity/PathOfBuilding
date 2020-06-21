@@ -1094,13 +1094,13 @@ return {
 } },
 { 1, "Block", 3, colorCodes.DEFENCE, {{ defaultCollapsed = false, label = "Block", data = {
 	extra = "{0:output:BlockChance}%/{0:output:SpellBlockChance}%",
-	{ label = "Block Chance", { format = "{0:output:BlockChance}%",
+	{ label = "Block Chance", { format = "{0:output:BlockChance}% (+{0:output:BlockChanceOverCap}%)",
 		{ breakdown = "BlockChance" },
 		{ modName = "BlockChance" }, 
 	}, },
-	{ label = "Spell Block Chance", { format = "{0:output:SpellBlockChance}%", 
+	{ label = "Spell Block Chance", { format = "{0:output:SpellBlockChance}% (+{0:output:SpellBlockChanceOverCap}%)", 
 		{ breakdown = "SpellBlockChance" }, 
-		{ modName = { "SpellBlockChance", "BlockChanceConv" }, },
+		{ modName = { "SpellBlockChance", "SpellBlockChanceIsBlockChance", "SpellBlockChanceMaxIsBlockChanceMax" }, },
 	}, },
 } }, { defaultCollapsed = true, label = "Gain on Block", data = {
 	extra = "{0:output:LifeOnBlock}/{0:output:ManaOnBlock}/{0:output:EnergyShieldOnBlock}",
