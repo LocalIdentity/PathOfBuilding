@@ -1201,6 +1201,7 @@ local modTagList = {
 	["if a minion has died recently"] = { tag = { type = "Condition", var = "MinionsDiedRecently" } },
 	-- Enemy status conditions
 	["at close range"] = { tag = { type = "Condition", var = "AtCloseRange" }, flags = ModFlag.Hit },
+	["against nearby enemies"] = { tag = { type = "MultiplierThreshold", actor = "enemy", var = "EnemyDistance", threshold = 60, upper = true } },
 	["against rare and unique enemies"] = { tag = { type = "ActorCondition", actor = "enemy", var = "RareOrUnique" }, keywordFlags = KeywordFlag.Hit },
 	["against unique enemies"] = { tag = { type = "ActorCondition", actor = "enemy", var = "RareOrUnique" }, keywordFlags = KeywordFlag.Hit },
 	["against enemies on full life"] = { tag = { type = "ActorCondition", actor = "enemy", var = "FullLife" }, keywordFlags = KeywordFlag.Hit },
