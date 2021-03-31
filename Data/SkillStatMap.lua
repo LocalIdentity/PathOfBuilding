@@ -3,6 +3,8 @@
 -- Stat to internal modifier mapping table for skills
 -- Stat data (c) Grinding Gear Games
 --
+local bor = bit.bor
+
 local mod, flag, skill = ...
 
 return {
@@ -497,7 +499,7 @@ return {
 	mod("TripleDamageChance", "BASE", nil)
 },
 ["damage_+%_with_hits_and_ailments"] = {
-	mod("Damage", "INC", nil, 0, bit.bor(KeywordFlag.Hit, KeywordFlag.Ailment)),
+	mod("Damage", "INC", nil, 0, 0, { type = "ModFlagOr", modFlags = bor(ModFlag.Hit, ModFlag.Ailment) }),
 },
 ["physical_damage_+%"] = {
 	mod("PhysicalDamage", "INC", nil),
@@ -977,8 +979,8 @@ return {
 	mod("ProjectileCount", "BASE", nil),
 },
 ["projectile_damage_+%_per_remaining_chain"] = {
-	mod("Damage", "INC", nil, ModFlag.Projectile, 0, { type = "PerStat", stat = "ChainRemaining" }),
-	mod("Damage", "INC", nil, ModFlag.Ailment, 0, { type = "PerStat", stat = "ChainRemaining" }),
+	mod("Damage", "INC", nil, ModFlag.Hit, 0, { type = "PerStat", stat = "ChainRemaining" }, { type = "SkillType", skillType = SkillType.Projectile }),
+	mod("Damage", "INC", nil, ModFlag.Ailment, 0, { type = "PerStat", stat = "ChainRemaining" }, { type = "SkillType", skillType = SkillType.Projectile }),
 },
 ["number_of_chains"] = {
 	mod("ChainCountMax", "BASE", nil),
