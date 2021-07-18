@@ -418,6 +418,32 @@ function calcs.buildActiveSkillModList(env, activeSkill)
 		end
 	end
 
+	-- Special handling for skills supported by Close Combat 
+	if skillFlags.attack and skillModList:Flag(activeSkill.skillCfg, "UseOnlyAxeAndSword") then
+		if skillFlags.weapon1Attack then
+			local weapon = env.data.weaponTypeInfo[activeSkill.actor.weaponData1.type].flag
+			if weapon ~= "Axe" and weapon ~= "Sword" then
+				skillFlags.weapon1Attack = false
+				skillFlags.bothWeaponAttack = false
+			end
+		end
+
+		if skillFlags.weapon2Attack then
+			local weapon = env.data.weaponTypeInfo[activeSkill.actor.weaponData2.type].flag
+			if weapon ~= "Axe" and weapon ~= "Sword" then
+				skillFlags.weapon2Attack = false
+				skillFlags.bothWeaponAttack = false
+			end
+		end
+		
+		if not (skillFlags.weapon1Attack or skillFlags.weapon2Attack) then
+			wipeTable(skillFlags)
+			skillFlags.disable = true
+			activeSkill.disableReason = "No usable weapon equipped"
+			return
+		end
+	end
+
 	-- Apply gem/quality modifiers from support gems
 	for _, value in ipairs(skillModList:List(activeSkill.skillCfg, "SupportedGemProperty")) do
 		if value.keyword == "active_skill" then

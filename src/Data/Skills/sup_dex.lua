@@ -1180,13 +1180,23 @@ skills["SupportSlashingWeapon"] = {
 	statDescriptionScope = "gem_stat_descriptions",
 	statMap = {
 		["support_slashing_damage_+%_final_from_distance"] = {
-			mod("Damage", "MORE", nil, bit.bor(ModFlag.Attack, ModFlag.Melee), 0, { type = "MeleeProximity", ramp = {1,0} }, { type = "Condition", varList = { "UsingSword", "UsingAxe" }}, { type = "Condition", varList = { "UsingClaw", "UsingDagger", "UsingMace" }, neg=true} ),
+			mod("Damage", "MORE", nil, bit.bor(ModFlag.Attack, ModFlag.Melee), 0, { type = "MeleeProximity", ramp = {1,0} }),
+		},
+		["support_slashing_buff_attack_cast_speed_+%_final_to_grant"] = {
+			mod("Speed", "MORE", nil, 0, 0, { type = "GlobalEffect", effectType = "Buff", effectName = "Combat Rush", effectCond = "CombatRushActive" }, { type = "Condition", var = "SupportedByCloseCombat", neg = true }, { type = "SkillType", skillType = SkillType.TravelSkill }),
+		},
+		["supported_skill_can_only_use_axe_and_sword"] = {
+			mod("UseOnlyAxeAndSword", "FLAG", true),
 		},
 		["close_combat_damage_to_close_range_+%"] = {
-			mod("Damage", "INC", nil, bit.bor(ModFlag.Attack, ModFlag.Melee), 0, { type = "Condition", var = "AtCloseRange" }, { type = "Condition", varList = { "UsingSword", "UsingAxe" }}, { type = "Condition", varList = { "UsingClaw", "UsingDagger", "UsingMace" }, neg=true} ),
+			mod("Damage", "INC", nil, bit.bor(ModFlag.Attack, ModFlag.Melee), 0, { type = "Condition", var = "AtCloseRange" }),
+		},
+		["combat_rush_effect_+%"] = {
+			mod("CombatRushEffect", "INC", nil),
 		},
 	},
 	baseMods = {
+		flag("Condition:SupportedByCloseCombat"),
 	},
 	qualityStats = {
 		Default = {
