@@ -1569,10 +1569,10 @@ skills["SupportMinionFocusFire"] = {
 		["support_minion_focus_fire_damage_+%_final_vs_focussed_target"] = {
 			mod("MinionModifier", "LIST", { mod = mod("Damage", "MORE", nil) }, 0, 0, { type = "Condition", var = "EnemyHasDeathmark" }),
 		},
-		["support_minion_focus_fire_critical_strike_chance_+%_final_vs_focussed_target"] = {
-			mod("MinionModifier", "LIST", { mod = mod("CritChance", "BASE", nil) }, 0, 0, { type = "Condition", var = "EnemyHasDeathmark" }),
+		["support_minion_focus_fire_critical_strike_chance_+%_vs_focused_target"] = {
+			mod("MinionModifier", "LIST", { mod = mod("CritChance", "INC", nil) }, 0, 0, { type = "Condition", var = "EnemyHasDeathmark" }),
 		},
-		["support_minion_focus_fire_critical_strike_multiplier_+%_final_vs_focussed_target"] = {
+		["support_minion_focus_fire_critical_strike_multiplier_+_vs_focused_target"] = {
 			mod("MinionModifier", "LIST", { mod = mod("CritMultiplier", "BASE", nil) }, 0, 0, { type = "Condition", var = "EnemyHasDeathmark" }),
 		},
 	},
@@ -2986,7 +2986,7 @@ skills["SupportBurningMinions"] = {
 			div = 60,
 			mod("ExtraMinionSkill", "LIST", { skillId = "InfernalLegion" }),
 		},
-		["minion_burning_damage_"] = {
+		["minion_burning_damage_+%"] = {
 			mod("MinionModifier", "LIST", { mod = mod("FireDamage", "INC", nil, 0, KeywordFlag.FireDot) }),
 		},
 		["minion_fire_damage_taken_+%"] = {
@@ -3679,6 +3679,9 @@ skills["SupportMinionDamage"] = {
 	statMap = {
 		["support_minion_damage_+%_final"] = {
 			mod("MinionModifier", "LIST", { mod = mod("Damage", "MORE", nil) }),
+		},
+		["minion_chance_to_deal_double_damage_%"] = {
+			mod("MinionModifier", "LIST", { mod = mod("DoubleDamageChance", "BASE", nil) }),
 		},
 		["minion_ailment_damage_+%"] = {
 			mod("MinionModifier", "LIST", { mod = mod("Damage", "INC", nil, 0, KeywordFlag.Ailment) }),
@@ -4825,6 +4828,9 @@ skills["SupportTrinity"] = {
 		},
 		["damage_penetrates_%_elemental_resistances_while_all_resonance_is_25"] = {
 			mod("ElementalPenetration", "BASE", nil, 0, 0, { type = "MultiplierThreshold", var = "ResonanceCount", threshold = 25 }),
+		},
+		["attack_and_cast_speed_+%_while_all_resonance_is_at_least_25"] = {
+			mod("Speed", "INC", nil, 0, 0, { type = "MultiplierThreshold", var = "ResonanceCount", threshold = 25 }),
 		},
 	},
 	baseMods = {
